@@ -1,0 +1,335 @@
+/* 1. CSS Variables for Theming */
+:root {
+    --bg-color: #FDFBF8; /* Branco Gelo (Fundo Principal) */
+    --bg-soft: #fbf5e9; /* Bege Claro (Fundo Suave) */
+    --card-bg: #ffffff; /* Branco (Cartões) */
+    --text-color: #5c4b3a; /* Marrom Médio (Texto Comum) */
+    --text-strong: #4a2c0c; /* Marrom Escuro (Texto Forte) */
+    --text-headings: #4a2c0c; /* Marrom Escuro (Títulos) */
+    --border-color: #e5e7eb; /* Cinza Claro (Bordas) */
+    --primary-color: #e6a43a; /* Dourado (Cor Principal) */
+    --primary-hover: #d4912a; /* Dourado Escuro (Hover) */
+    --primary-text: #ffffff; /* Branco (Texto em botões) */
+    --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+html.dark {
+    --bg-color: #2d1a07; /* Marrom Bem Escuro (Fundo Principal) */
+    --bg-soft: #4a2c0c; /* Marrom Escuro (Fundo Suave) */
+    --card-bg: #4a2c0c; /* Marrom Escuro (Cartões) */
+    --text-color: #f3e9dc; /* Bege (Texto Comum) */
+    --text-strong: #ffffff; /* Branco (Texto Forte) */
+    --text-headings: #e6a43a; /* Dourado (Títulos) */
+    --border-color: #5c4b3a; /* Marrom Médio (Bordas) */
+    --primary-color: #e6a43a; /* Dourado (Cor Principal) */
+    --primary-hover: #f8b54b; /* Dourado Claro (Hover) */
+    --primary-text: #2d1a07; /* Marrom Bem Escuro (Texto em botões) */
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+html.contrast {
+    --bg-color: #000000;
+    --bg-soft: #000000;
+    --card-bg: #000000;
+    --text-color: #ffffff;
+    --text-strong: #ffff00;
+    --text-headings: #ffff00;
+    --border-color: #ffffff;
+    --primary-color: #ffff00;
+    --primary-hover: #ffffff;
+    --primary-text: #000000;
+    --shadow-color: rgba(255, 255, 255, 0.5);
+}
+
+/* 2. Applying Variables & Title Standardization */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif;
+    color: var(--text-strong);
+}
+.section-title {
+    color: var(--text-headings);
+}
+.section-subtitle {
+    color: var(--text-color);
+}
+.lead-in-text {
+    color: var(--primary-color);
+}
+.card { 
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+    border-radius: 0.5rem;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.card:hover { 
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
+    transform: translateY(-5px);
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--primary-text);
+    transition: all 0.3s;
+    transform: translateY(0);
+}
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px) scale(1.05);
+}
+.nav-link {
+    color: var(--text-color);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+}
+.nav-link:hover { color: var(--primary-color); }
+.nav-link.active {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.prose { color: var(--text-color); }
+.prose h3, .prose h4 { 
+    color: var(--text-strong);
+}
+.prose ul > li::before { background-color: var(--text-color); }
+
+/* 3. Page Navigation & Widgets */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.accessibility-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+}
+.accessibility-toggle-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-strong);
+}
+.accessibility-widget {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+.accessibility-widget.expanded {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.access-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+.access-btn:hover { background-color: var(--bg-soft); }
+.access-btn.active {
+    background-color: var(--primary-color);
+    color: var(--primary-text);
+    border-color: var(--primary-color);
+}
+.floating-whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366; /* WhatsApp Green */
+    color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 99;
+    transition: transform 0.3s ease;
+}
+.floating-whatsapp-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 4. Quote Rotator */
+.quote-rotator-item {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+.quote-rotator-item.active {
+    display: block;
+}
+.quote-rotator-item.show {
+    opacity: 1;
+}
+
+/* 5. Specificity Fix */
+.btn-primary.nav-link {
+    color: var(--primary-text);
+}
+
+/* 6. Footer Styles (Final Version) */
+footer {
+    background-color: var(--text-strong);
+    color: var(--bg-color);
+    position: relative;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+footer::before,
+footer::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: url("../img/FooterTransparent.png");
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+}
+
+footer::before {
+    top: 10px;
+}
+
+footer::after {
+    bottom: 10px;
+}
+
+/* Footer Text Color Restoration */
+footer h3 {
+    color: var(--bg-color);
+    opacity: 1;
+}
+footer p, footer a {
+    color: var(--bg-color);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+footer a:hover {
+    opacity: 1;
+}
+
+/* Footer Nav Link Specifics */
+footer .nav-link {
+    border-color: transparent !important;
+}
+footer .nav-link:hover, footer .nav-link.active {
+    color: var(--primary-color);
+}
+
+/* Social Icon Styles */
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.social-icon:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+.social-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--bg-color); /* Default color is the theme's background color */
+    transition: fill 0.3s;
+}
+
+/* Social Icon Brand Colors on Hover */
+.social-icon.social-whatsapp:hover svg { fill: #25D366; }
+.social-icon.social-instagram:hover svg { fill: #c13584; }
+.social-icon.social-linkedin:hover svg { fill: #0077b5; }
+
+
+/* 7. Header & Footer Typography */
+header h1, header nav a,
+footer {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+footer p, footer a {
+    font-weight: 400;
+}
+footer h3 {
+    font-weight: 700;
+}
+
+/* 8. Inverted Button */
+.btn-inverted {
+    background-color: var(--primary-text);
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+.btn-inverted:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* 9. MOBILE-FIRST ADJUSTMENTS */
+@media (max-width: 767px) {
+    body {
+        font-size: 15px;
+    }
+
+    footer {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+    footer::before,
+    footer::after {
+        height: 60px;
+    }
+    footer::before {
+        top: 5px;
+    }
+    footer::after {
+        bottom: 5px;
+    }
+    footer .grid > div {
+        text-align: center;
+    }
+}
