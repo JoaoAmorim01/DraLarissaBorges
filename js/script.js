@@ -114,7 +114,7 @@ const pagesHTML = {
                             <span class="lead-in-text font-semibold block mb-2">Transformação e Impacto</span>
                             <h3 class="text-3xl font-bold mb-4">Palestras e Consultorias</h3>
                             <p>Levo para empresas, ONGs e instituições públicas discussões e práticas sobre saúde mental, diversidade, equidade, liderança e empoderamento. Crio pontes entre diferentes realidades para construir soluções e promover a igualdade racial e de gênero.</p>
-                            <button class="btn-primary mt-4 font-bold py-3 px-6 rounded-lg nav-link" data-page="contato">Contrate uma palestra</button>
+                            <a href="https://api.whatsapp.com/send?phone=5531991349750&text=Ol%C3%A1%2C%20Dra.%20Larissa%2C%20tudo%20bem%3F%20Vi%20seu%20trabalho%20no%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20suas%20palestras%20e%20consultorias%20para%20a%20minha%20empresa%2Fevento." target="_blank" class="btn-primary inline-block font-bold py-3 px-6 rounded-lg">Contrate uma palestra</a>
                         </div>
                         <div class="order-1 md:order-2 flex justify-center">
                             <img src=".././img/larissaCírculo.png" alt="Foto em close da Dra. Larissa Borges rindo, com as mãos juntas em frente ao corpo." class="rounded-lg w-full max-w-sm h-auto object-cover">
